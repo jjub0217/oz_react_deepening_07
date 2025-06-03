@@ -23,12 +23,17 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
 
   const handleComponentToggle = () => {
-    setComponentRunning((prev) => {
-      const toggleState = !prev;
-      setIsRunning(toggleState); // 컴포넌트를 끌 때만 정지
-      return toggleState;
-    });
+    const toggleState = !componentRunning;
+    setComponentRunning(toggleState);
+    if (toggleState) {
+      // 컴포넌트를 시작할 때 타이머도 같이 시작
+      setIsRunning(true);
+    } else {
+      // 컴포넌트를 끌 때는 타이머 정지
+      setIsRunning(false);
+    }
   };
+
   const handleStartStop = () => {
     setIsRunning((prev) => !prev);
   };
